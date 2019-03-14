@@ -1,42 +1,447 @@
-html { margin: 0; padding: 0; }
-body { font-size: 100%; margin: 0; padding: 1.75em; font-family: 'Helvetica Neue', Arial, sans-serif; }
-
-h1 { font-size: 1.75em; margin: 0 0 0.6em 0; }
-h2 { font-size: 1.25em; margin: 0 0 0.6em 0; }
-
-a { color: #2996cc; }
-a:hover { text-decoration: none; }
-
-p { line-height: 1.5em; }
-.small { color: #666; font-size: 0.875em; }
-.large { font-size: 1.25em; }
-
-
-label {
-    font-weight: bold;
+/* general */
+*{
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
 }
 
-input[type="text"] {
-    margin: 0.5em 0 3em 0;
-    padding: 0.5em;
+img{
+	height: auto;
+	max-width: 100%;
 }
 
-button#datepicker-button {
-    margin-bottom: 3em;
+.wrapper{
+	margin: 0 auto;
 }
 
-.flow-element {
+.grid-1,
+.grid_2,
+.grid_3,
+.grid_4,
+.grid_5,
+.grid_6,
+.grid_7,
+.grid_8,
+.grid_9,
+.grid_10,
+.grid_11,
+.grid_12{
+	padding: 0 15px;
+}
+
+
+a:focus,
+input:focus,
+select:focus,
+button:focus{
+	outline: 3px solid #3dbbdb !important;
+	overflow: -moz-hidden-unscrollable;
+}
+
+
+
+/* typography */
+body{
+	color:#000000;
+	font-family:'Ubuntu', Helvetica, sans-serif;
+	font-size:1em;
+	line-height:1.4em; 
+	font-weight:normal;
+
+	color: #6d6d6d;
+	font-family: "Gotham SSm A","Gotham SSm B", sans-serif;
+	line-height: 200%;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-weight:normal;
+	font-family:'Droid Serif', Helvetica, sans-serif;
+	line-height:1.5em;
+	margin:.45em 0;
+	padding:0;
+
+	color: #000;
+	font-family: "Gotham SSm A","Gotham SSm B", sans-serif;
+	font-weight: 700;
+}
+
+h1{
+	margin-top: 0;
+}
+
+p{
+	margin:0 0 1.5em;
+}
+
+
+
+/* links */
+a,
+a:visited{
+	color: #57068c;
+	text-decoration: none;
+}
+a:hover,
+a:active{
+	color: #57068c;
+	text-decoration: underline;
+}
+
+a.promo{
+	display: block;
+	box-shadow: inset 0 -3px 0 0 #57068c;
+	border: 1px solid #d6d6d6;
+	padding: 15px;
+	margin-bottom: 15px;
+	position: relative;
+	background: #fff;
+}
+
+a.promo:hover{
+	text-decoration: none;
+}
+
+a.promo::after{
+	content: "";
+	height: 7px;
+	width: 7px;
+	position: absolute;
+	bottom: 9.5px;
+	right: 10.5px;
+	border-right: 3px solid #57068c;
+	border-bottom: 3px solid #57068c;
+	z-index: 2;
+}
+
+a.promo:hover::after{
+	border-right: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+}
+
+a.promo:hover::before{
+	content: "";
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 0 40px 40px;
+	border-color: transparent transparent #56068c transparent;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+}
+
+a.promo .promo-title{
+	color: #57068c;
+	margin: 0 !important;
+	font-size: 18px;
+	line-height: 150%;
+	font-weight: 700;
+}
+
+a.promo .promo-content p{
+	line-height: 150%;
+	font-size: 15px;
+	color: #6d6d6d;
+}
+
+a.promo-button-text,
+a.promo-button-text:visited,
+button.promo-button-text,
+button.promo-button-text:visited {
+	color: #57068c;
+	border: 1px solid #57068c;
+	padding: 10px 20px !important;
+	display: inline-block;
+	text-decoration: none;
+	font-family: "Gotham A", "Gotham B", sans-serif;
+	font-weight: 700;
+	background: #fff;
+	margin: 1rem 0;
+}
+
+a.promo-button-text:hover,
+button.promo-button-text:hover{
+	background: #57068c;
+	color: #fff;
+}
+
+
+
+
+/* bypass-block */
+a.bypass-block {
+	background: #3dbbdb;
+	color: #000;
+	font-family: "Gotham A", "Gotham B", sans-serif;
+	font-weight: 700;
+	height: 45px;
+	left: -45px;
+	line-height: 45px;
+	padding: 0 45px 0 90px;
+	position: absolute;
+	text-transform: uppercase;
+	top: 115px;
+	z-index: 9999;
+
+	-webkit-transition: all 300ms cubic-bezier(0.3, -0.01, 0.57, 1.36);
+	        transition: all 300ms cubic-bezier(0.3, -0.01, 0.57, 1.36);
+
+	-webkit-transform: translateX(-100%);
+	        transform: translateX(-100%);
+}
+
+a.bypass-block:hover{
+	color: #000;
+	text-decoration: none;
+}
+
+a.bypass-block:focus{
+	outline: none !important;
+
+	-webkit-box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+	        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.05);
+
+	-webkit-transform: translateX(0);
+	        transform: translateX(0);
+}
+
+
+
+/* header */
+
+#header{
+	background: #56068c;
+	height: 115px;
+	line-height: 115px;
+}
+
+.logo{
+	width: 134px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.logo svg {
+	fill: #fff;
+	width: 134px;
+	display: block;
+}
+
+
+
+
+
+/* main */
+#content{
+	margin:45px 0 40px;
+}
+
+
+
+
+
+/* sidebar */
+#sidebar{
+	margin:45px 0 40px;
+}
+
+
+
+
+
+/* footer */
+#footer{
+	background:#000;
+	color: #f2f2f2;
+	padding: 20px 0;
+}
+
+#footer a{
+	color: #f2f2f2;
+	font-size: 13px;
+}
+
+#footer .highlighted-item a{
+	color: #fff;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+#footer .highlighted-item + a{
+	margin-top: 10px;
+}
+
+#footer .copyright{
+	font-family: "Mercury SSm A", "Mercury SSm B", "MercuryTextG2", serif;
+	padding: 22px 15px;
+	color: #f2f2f2;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 200%;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    display: block;
+    padding: 1rem 0.666666666666667rem;
+    font: 400 1rem "Gotham SSm A", "Gotham SSm B", sans-serif;
+    color: #5c5c5c;
+    background: #fbfbfb;
+    border: 1px solid #ddd4d4;
+    height: 3rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 0;
+    margin: 0.33333333333333rem 0 0.666666666666667rem;
+    -webkit-appearance: none;
+}
+input{
+    font: 400 1rem "Gotham SSm A", "Gotham SSm B", sans-serif;
+}
+.button, .delete {
+    font-family: "Gotham A", "Gotham B", sans-serif;
+    font-weight: 700;
     display: inline-block;
-    margin-right: 3em;
-    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: 30rem;
+    padding: 0.733333333333333rem 1.33333333333333rem !important;
+    text-decoration: none;
+    color: #57068c;
+    border: 1px solid #57068c;
+    background: #fff;
+    cursor: pointer;
 }
-.flow-element:last-child {
-    margin-right: 0;
-}
-.flow-element input {
-    margin-top: 0;
+.datalabel {
+    display: inline-block;
+    top: -70px;
+    left: -15px;
+    padding: 5px 10px;
+    z-index: 1;
+    background-color: #57068c;
+    color: #ffffff;
+    font-size: 1rem;
+    border-radius: 12px;
+    animation:animatezoom 0.6s}
+	@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}
+
 }
 
-#container {
-    min-height: 15em;
+/*
+LARGER MOBILE DEVICES
+This is for mobile devices with a bit larger screens.
+*/
+@media only screen and (min-width: 481px) {
+
+	#footer nav{
+		display: inline-flex;
+	}
+
+	#footer .highlighted-item + a{
+		margin-top: 0;
+		font-size: 15px;
+	}
+
+	#footer .highlighted-item::after {
+		font-size: 15px;
+		font-weight: 700;
+		line-height: 18px;
+		margin: 0 15px;
+		content: "|";
+		color: #fff;
+	}
+
+	#footer .copyright{
+		padding: 0 15px;
+	}
+
+}
+
+/*
+TABLET & SMALLER LAPTOPS
+The average viewing window and preferred media query for those is 768px.
+But I think that some more breathing space is good:)
+*/
+@media only screen and (min-width: 920px) {
+
+	.wrapper{
+		max-width: 1200px;
+	}
+
+	.row{
+		display: flex;
+	}
+
+	.grid_1 { width: 8.33333333%; }
+	.grid_2 { width: 16.66666667%; }
+	.grid_3 { width: 25%; }
+	.grid_4 { width: 33.33333333%; }
+	.grid_5 { width: 41.66666667%; }
+	.grid_6 { width: 50%; }
+	.grid_7 { width: 58.33333333%; }
+	.grid_8 { width: 66.66666667%; }
+	.grid_9 { width: 75%; }
+	.grid_10 { width: 83.33333333%; }
+	.grid_11 { width: 91.66666667%; }
+	.grid_12 { width: 100%; }
+
+}
+
+
+
+/*
+DESKTOP
+This is the average viewing window. So Desktops, Laptops, and
+in general anyone not viewing on a mobile device. Here's where
+you can add resource intensive styles.
+*/
+@media only screen and (min-width: 1030px) {
+
+} 
+
+/*
+LARGE VIEWING SIZE
+This is for the larger monitors and possibly full screen viewers.
+*/
+@media only screen and (min-width: 1240px) {
+
+} 
+
+/*
+RETINA (2x RESOLUTION DEVICES)
+This applies to the retina iPhone (4s) and iPad (2,3) along with
+other displays with a 2x resolution.
+*/
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+       only screen and (min--moz-device-pixel-ratio: 1.5),
+       only screen and (min-device-pixel-ratio: 1.5) {
+
+
+} 
+
+/*
+iPHONE 5 MEDIA QUERY
+iPhone 5 or iPod Touch 5th generation styles (you can include your own file if you want)
+*/
+@media (device-height: 568px) and (-webkit-min-device-pixel-ratio: 2) { 
+
+  
+}
+
+/*
+PRINT STYLESHEET
+*/
+@media print {
+  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
+  a, a:visited { text-decoration: underline; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* h5bp.com/t */
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
 }
