@@ -6,63 +6,10 @@
   <title>OPT Calculator</title>
   <meta name="author" content="Daniel Castano">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css">       
+  <link rel="stylesheet" href="./css/site.css">       
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<style>
-form button {
-    font-family: "Gotham A", "Gotham B", sans-serif;
-    font-weight: 700;
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    max-width: 30rem;
-    padding: 0.733333333333333rem 1.33333333333333rem !important;
-    text-decoration: none;
-    color: #57068c;
-    border: 1px solid #57068c;
-    background: #fff;
-    cursor: pointer;
-}
-h3 {
-    color: #000;
-    font-family: "Gotham A","Gotham B", sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-}
-h2 {
-    color: #000;
-    font-family: "Gotham A","Gotham B", sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-}
-p, span {
-    color: #404040;
-    font-family: "Gotham SSm A","Gotham SSm B", sans-serif;
-    font-size: 1rem;
-    font-weight: normal;
-    line-height: 200%;
-}
-input[type=text], input[type=password] {
-    width: 100%;
-    display: block;
-    padding: 1rem 0.666666666666667rem;
-    font: 400 1rem "Gotham SSm A", "Gotham SSm B", sans-serif;
-    color: #5c5c5c;
-    background: #fbfbfb;
-    border: 1px solid #ddd4d4;
-    height: 3rem;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border-radius: 0;
-    margin: 0.33333333333333rem 0 0.666666666666667rem;
-    -webkit-appearance: none;
-}
-input{
-    font: 400 1rem "Gotham SSm A", "Gotham SSm B", sans-serif;
-}
 
-
-</style>
   <script>
   //Max Start/End dates tupla to add
   var max_fields  = 3;
@@ -90,7 +37,7 @@ input{
         //Increase Id
         id++;
         //Add two pickaday calendars to choose start and final date
-        $(wrapper).append('<div id="addDelete'+id+'"><div style="display: inline-block"><h2>Start:</h2><input placeholder="Enter Start Date" aria-label="Use the arrow keys to pick a OPT start date" class="input is-rounded is-small" type="text" id="start'+id+'" name = "start'+id+'"></div>&nbsp;<div style="display: inline-block"><h2>End:</h2><input placeholder="Enter End Date" aria-label="Use the arrow keys to pick a OPT end date" class="input is-rounded is-small" type="text" id="end'+id+'" name = "end'+id+'"></div> <input type="checkbox" aria-label="Check if the OPT was partime" name="partime'+id+'" value="partime'+id+'" id="partime'+id+'" onchange="daysCalculation()"><span> Was it a part-time? </span><button aria-label="Click to delete OPT range dates" class="delete" id="delete'+id+'" name="delete'+id+'" style="vertical-align:middle;">Delete</button></div>');
+        $(wrapper).append('<div id="addDelete'+id+'"><div style="display: inline-block"><label for="start'+id+'">Start Date:</label><input placeholder="Enter Start Date" aria-label="Use the arrow keys to pick a OPT start date" class="input is-rounded is-small" type="text" id="start'+id+'" name = "start'+id+'"></div>&nbsp;<div style="display: inline-block"><label for="end'+id+'">End Date:</label><input placeholder="Enter End Date" aria-label="Use the arrow keys to pick a OPT end date" class="input is-rounded is-small" type="text" id="end'+id+'" name = "end'+id+'"></div> <input type="checkbox" aria-label="Check if the OPT was partime" name="partime'+id+'" value="partime'+id+'" id="partime'+id+'" onchange="daysCalculation()"><label for="partime'+id+'">Was it a part-time training?</label><button aria-label="Click to delete the last OPT range dates" class="delete" id="delete'+id+'" name="delete'+id+'" style="vertical-align:middle;">Delete</button></div>');
         //Include calendar behaviour
         createRangeCalendars();
         //Removes the last remove button
@@ -101,7 +48,7 @@ input{
       else
       {
         //Pop up if user reach max
-        alert('You Reached the limit')
+        alert('You reached the limit')
       }
     });
     //Click in DELETE buttons
@@ -148,7 +95,7 @@ input{
     $( ".addRanges" ).empty();
     id = 1;
     daysCalculation();
-    console.log(calendars.length);
+    //console.log(calendars.length);
 
   }
     //Calculate the days left to do OPT
@@ -180,7 +127,11 @@ input{
       }
       days = precisionRound(days,1);
       //console.log("Days will be: " + days);
-      document.getElementById('days').innerHTML = days;
+      var labeldays = document.getElementById('days');
+      labeldays.innerHTML = days;
+      var elm = labeldays;
+      var newone = elm.cloneNode(true);
+      elm.parentNode.replaceChild(newone, elm);
     }
     // Method to round the date in a nuumber with range 0.5
     function precisionRound(number, precision) {
@@ -245,34 +196,36 @@ input{
 </head>
 <body>
       <div class="container">
-        <h3>Welcome to the OPT Calculator</h3>
 
         <p>If you have already done OPT at your current academic level, use this date calculator to find out how much time you have remaining for your OPT to calculate your end date. If you have done more than 11.5 months of full-time CPT then OPT is no longer available to you.</p>
 
         <form method = 'POST' action = '/process' >
 
-          <h2>Past OPT(s)</h2>
+          <h3>Past OPT(s)</h3>
           <div>
           <div style="display: inline-block">
-            <h2>Start:</h2>
+            <label for="start1">Start Date:</label>
             <input placeholder="Enter Start Date" aria-label="Use the arrow keys to pick a OPT start date" class="input is-rounded is-small" type="text" id="start1" name = "start1">
           </div>
           <div style="display: inline-block">
-            <h2>End:</h2>
+            <label for="end1">End Date:</label>
             <input placeholder="Enter End Date" aria-label="Use the arrow keys to pick a OPT end date" class="input is-rounded is-small" type="text" id="end1" name = "end1">
           </div>
-          <input aria-label="Check if the OPT was partime"  type="checkbox" name="partime1" value="partime1" id="partime1" onchange = "daysCalculation()" > <span>Was it a part-time?</span></div>
-          <div class="addRanges" id="addRanges">
-          </div>
-          <button class="button" id="buttonAddRanges" aria-label="Press the button to add more OPT date ranges">Add New OPT &nbsp; + </button>
-          <button class="button" id="buttonReset">Reset</button>
-
           <div style="display: inline-block">
 
-            <!--  <input class = "button is-success" id="calculate" type="submit" name="submitbutton" value="CALCULATE" />
-            <button type="button" id="calculate">Calculate Submission Range</button>
-          -->    </div>
-          <p aria-label="This is the number of days you have remaining">You have: <span style="font-weight: bold;" id = "days">365</span> days left to do another OPT</p>
+          <input aria-label="Check if the OPT was partime"  type="checkbox" name="partime1" value="partime1" id="partime1" onchange = "daysCalculation()"><label for="partime1">Was it a part-time training?</label></div>
+          <div class="addRanges" id="addRanges">
+          </div>
+          </div>
+          </br>
+          <div>
+          <button class="button" id="buttonAddRanges" aria-label="Press the button to add more OPT date ranges">Add New OPT &nbsp; + </button>
+          <button class="button" aria-label="Press the button Reset to start all over" id="buttonReset">Reset</button>
+          </div>
+          </br>
+          <div>
+          <p aria-live="assertive" aria-label="This is the number of days you have remaining">You have: <span class ="datalabel" aria-live="assertive" aria-label="This is the number of days you have remaining" id="days">365</span> days left to do another OPT </p>
+        </div>
         </form>
         <script>
         //store all calendars
