@@ -326,6 +326,9 @@ input{
 	@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}
 
 }
+label{
+	padding-right: 0.5rem;
+}
 
 /*
 LARGER MOBILE DEVICES
