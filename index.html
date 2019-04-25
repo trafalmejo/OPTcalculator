@@ -72,7 +72,7 @@
 		  label{
 		  	font-weight: bold;
 		  }
-		  }
+		  
 		</style>
 		  <script>
 		  //Max Start/End dates tupla to add
@@ -101,7 +101,7 @@
 		        //Increase Id
 		        id++;
 		        //Add two pickaday calendars to choose start and final date
-		        $(wrapper).append('<div id="addDelete'+id+'"><div id="startBlock"><label for="start'+id+'">Start Date:</label>&nbsp<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT start date" class="input is-rounded is-small" type="text" id="start'+id+'" name = "start'+id+'" style="display: inline-block; width: auto">&nbsp<a href="#" id="calendar-start'+id+'" class="promo-icon fa fa-calendar"></a>&nbsp</div><div id="endBlock"><label for="end'+id+'">End Date:</label>&nbsp<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT end date" class="input is-rounded is-small" type="text" id="end'+id+'" name = "end'+id+'" style="display: inline-block; width: auto">&nbsp<a href="#" id="calendar-end'+id+'" class="promo-icon fa fa-calendar"></a>&nbsp</div><div id="partimeBlock"><input aria-label="Check if the OPT was partime"  type="checkbox" name="partime'+id+'" value="partime'+id+'" id="partime'+id+'" onchange = "daysCalculation()"><label for="partime'+id+'">Was it a part-time training?</label></div><button aria-label="Click to delete the last OPT range dates" class="delete" id="delete'+id+'" name="delete'+id+'" style="vertical-align:middle;">Delete</button></div></div>');
+		        $(wrapper).append('<div id="addDelete'+id+'"><div id="startBlock"><label for="start'+id+'">Start Date:</label>&nbsp<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT start date" class="input is-rounded is-small" type="text" id="start'+id+'" name = "start'+id+'" style="display: inline-block; width: auto">&nbsp<a href="#" id="calendar-start'+id+'" class="promo-icon fa fa-calendar"></a>&nbsp</div><div id="endBlock"><label for="end'+id+'">End Date:</label>&nbsp<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT end date" class="input is-rounded is-small" type="text" id="end'+id+'" name = "end'+id+'" style="display: inline-block; width: auto">&nbsp<a href="#" id="calendar-end'+id+'" class="promo-icon fa fa-calendar"></a>&nbsp</div><div id="partimeBlock"><input aria-label="Check if the OPT was partime"  type="checkbox" name="partime'+id+'" value="partime'+id+'" id="partime'+id+'" onchange = "daysCalculation()"><label for="partime'+id+'">Was it a part-time training?</label></div><button type="button" aria-label="Click to delete the last OPT range dates" class="delete" id="delete'+id+'" name="delete'+id+'" style="vertical-align:middle;">Delete</button></div></div>');
 
 		        //Include calendar behaviour
 		        createRangeCalendars();
@@ -145,7 +145,6 @@
 		        calendars[t].setMinDate(new Date(2000, 00, 01));
 		        calendars[t].setMaxDate(new Date(2020, 11, 31));
 		        if(t > 1){
-		          console.log("happening");
 		          calendars.pop().destroy();
 		        }
 		        //calendars[t].onSelect();
@@ -165,8 +164,9 @@
 		  }
 		    //Calculate the days left to do OPT
 		    function daysCalculation(){
+		      //console.log('number ranges: ', i);
 		      var ranges = [];
-		      var milliseconds = 0;
+		      var allOPTdays = 0;
 		      for(i = 1; i <= max_fields; i++){
 		        var start = (document.getElementById('start'+i));
 		        var end = (document.getElementById('end'+i));
@@ -181,12 +181,19 @@
 		          else{
 		            var startDate = new Date(start.value);
 		            var endDate = new Date(end.value);
-		            ranges[i-1] = check.checked ? Math.abs(endDate - startDate  + 86400000)*.5 : Math.abs(endDate - startDate + 86400000);
+		            var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+		            var diffDays = check.checked ? 0.5*(1 + Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay)))):(1 + Math.round(Math.abs((startDate.getTime() - endDate.getTime())/(oneDay))));
+		            var leftDays = diffDays;
+		            //console.log('diffDays: ', diffDays);
+		      		//console.log('365 - diffDays: ', leftDays);
+		      		ranges[i-1] = leftDays;
 		          }
 		        }
-		        milliseconds = Math.abs(milliseconds + ranges[i-1]);
+		        allOPTdays += Math.abs(ranges[i-1]);
+		        console.log("Range: ", i-1 , ranges[i-1]);
 		      }
-		      var days = 365 - (milliseconds / (1000*60*60*24));
+		      console.log("OPT days: ", allOPTdays);
+		      var days = 365 - allOPTdays;
 		      if(days < 0){
 		        days = 0 ;
 		      }
@@ -311,8 +318,8 @@
 		          </div>
 		          </br>
 		          <div>
-		          <button class="button" id="buttonAddRanges" aria-label="Press the button to add more OPT date ranges">Add New OPT &nbsp; + </button>
-		          <button class="button" aria-label="Press the button Reset to start all over" id="buttonReset">Reset</button>
+		          <button class="button" type="button" id="buttonAddRanges" aria-label="Press the button to add more OPT date ranges">Add New OPT &nbsp; + </button>
+		          <button class="button" type="button" aria-label="Press the button Reset to start all over" id="buttonReset">Reset</button>
 		          </div>
 		          </br>
 		          <div>
@@ -386,6 +393,5 @@
 		        calendars.push(startPicker1);
 		        calendars.push(endPicker1);
 		      </script>
-		    </div>
 		</body>
 		</html>
