@@ -142,7 +142,7 @@ label{
 		        //Increase Id
 		        id++;
 		        //Add two pickaday calendars to choose start and final date
-		        $(wrapper).append('<div id="addDelete'+id+'"><div id="startBlock"><label for="start'+id+'">Start Date:</label>&nbsp<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT start date" class="input is-rounded is-small" type="text" id="start'+id+'" name = "start'+id+'" style="display: inline-block; width: auto">&nbsp<a href="#" id="calendar-start'+id+'" class="promo-icon fa fa-calendar"></a>&nbsp</div><div id="endBlock"><label for="end'+id+'">End Date:</label>&nbsp<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT end date" class="input is-rounded is-small" type="text" id="end'+id+'" name = "end'+id+'" style="display: inline-block; width: auto">&nbsp<a href="#" id="calendar-end'+id+'" class="promo-icon fa fa-calendar"></a>&nbsp</div><div id="partimeBlock"><input aria-label="Check if the OPT was partime"  type="checkbox" name="partime'+id+'" value="partime'+id+'" id="partime'+id+'" onchange = "daysCalculation()"><label for="partime'+id+'">Was it a part-time training?</label></div><button type="button" aria-label="Click to delete the last OPT range dates" class="delete" id="delete'+id+'" name="delete'+id+'" style="vertical-align:middle;">Delete</button></div></div>');
+		        $(wrapper).append('<div id="addDelete'+id+'"><div id="startBlock"><label for="start'+id+'">Start Date:</label>&nbsp<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT start date" class="input is-rounded is-small" type="text" id="start'+id+'" name = "start'+id+'" style="display: inline-block; width: auto">&nbsp<a href="#optcalculator" id="calendar-start'+id+'" class="promo-icon fa fa-calendar"></a>&nbsp</div><div id="endBlock"><label for="end'+id+'">End Date:</label>&nbsp<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT end date" class="input is-rounded is-small" type="text" id="end'+id+'" name = "end'+id+'" style="display: inline-block; width: auto">&nbsp<a href="#optcalculator" id="calendar-end'+id+'" class="promo-icon fa fa-calendar"></a>&nbsp</div><div id="partimeBlock"><input aria-label="Check if the OPT was partime"  type="checkbox" name="partime'+id+'" value="partime'+id+'" id="partime'+id+'" onchange = "daysCalculation()"><label for="partime'+id+'">Was it a part-time training?</label></div><button type="button" aria-label="Click to delete the last OPT range dates" class="delete" id="delete'+id+'" name="delete'+id+'" style="vertical-align:middle;">Delete</button></div></div>');
 
 		        //Include calendar behaviour
 		        createRangeCalendars();
@@ -322,22 +322,21 @@ label{
 
 		  }
 		</script>
-
-		<div class="container">
+<div class="container">
 			<form method = 'POST' action = '/process' >
 
-				<h3>Past OPT(s)</h3>
+				<h3 name="optcalculator">Past OPT(s)</h3>
 				<div>
 					<div id="startEndBlock">
 						<div id="startBlock">
 							<label for="start1">Start Date:</label>
 							<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT start date" class="input is-rounded is-small" type="text" id="start1" name = "start1" style="display: inline-block; width: auto">
-							<a href="#" id="calendar-start1" class="promo-icon fa fa-calendar"></a>
+							<a href="#optcalculator" id="calendar-start1" class="promo-icon fa fa-calendar"></a>
 						</div>
 						<div id="endBlock">
 							<label for="end1">End Date:</label>
 							<input placeholder="MM/DD/YYYY" aria-label="Use the arrow keys to pick a OPT end date" class="input is-rounded is-small" type="text" id="end1" name = "end1" style="display: inline-block; width: auto">
-							<a href="#" id="calendar-end1" class="promo-icon fa fa-calendar"></a>
+							<a href="#optcalculator" id="calendar-end1" class="promo-icon fa fa-calendar"></a>
 						</div>
 					</div>
 					<div id="partimeBlock">
